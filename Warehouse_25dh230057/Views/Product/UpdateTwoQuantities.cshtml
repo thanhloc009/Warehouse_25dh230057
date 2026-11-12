@@ -1,0 +1,26 @@
+﻿@model Warehouse_25dh230057.Models.UpdateTwoQuantitiesViewModel
+@{ ViewBag.Title = "Kiểm kê hai sản phẩm";
+    Layout = "~/Views/Shared/_LayoutWare.cshtml";
+ }
+<h2>Kiểm kê đồng thời hai sản phẩm</h2>
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "field-error" })
+                                <div class="two-column">
+                                    <div class="form-card">
+                                        <h3>Sản phẩm A</h3>
+                                        <label>ProductID</label>
+                                        @Html.TextBoxFor(m => m.ProductID1, new { type = "number", min = "1", required = "required" })
+                                        <label>Số lượng thực tế</label>
+                                        @Html.TextBoxFor(m => m.ActualQuantity1, new { type = "number", min = "0", step = "1", required = "required" })
+                                    </div>
+                                    <div class="form-card">
+                                        <h3>Sản phẩm B</h3>
+                                        <label>ProductID</label>
+                                        @Html.TextBoxFor(m => m.ProductID2, new { type = "number", min = "1", required = "required" })
+                                        <label>Số lượng thực tế</label>
+                                        @Html.TextBoxFor(m => m.ActualQuantity2, new { type = "number", min = "0", step = "1", required = "required" })
+                                    </div>
+                                </div>
+                                                <button class="btn" type="submit">Cập nhật cả hai trong một transaction</button>}

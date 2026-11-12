@@ -1,0 +1,34 @@
+﻿@model Warehouse_25dh230057.Models.ProductSearchViewModel
+@{ ViewBag.Title = "Tra cứu hàng hóa";
+    Layout = "~/Views/Shared/_LayoutWare.cshtml";
+ }
+<h2>Tra cứu hàng hóa</h2>
+@using (Html.BeginForm("Search", "Product", FormMethod.Get))
+{
+<div class="filter-bar">
+    <input type="text" name="q" value="@Model.Keyword" placeholder="Nhập tên sản phẩm..." />
+    <select name="status">
+        <option value="">Tất cả tình trạng</option>
+        <option value="out" @(Model.StockStatus == "out" ? "selected" : "")>Hết hàng</option>
+        <option value="low" @(Model.StockStatus == "low" ? "selected" : "")>Sắp hết</option>
+        <option value="enough" @(Model.StockStatus == "enough" ? "selected" : "")>Đủ hàng</option>
+    </select>
+    <select name="sort">
+        <option value="asc" @(Model.SortOrder == "asc" ? "selected" : "")>Giá tăng dần</option>
+        <option value="desc" @(Model.SortOrder == "desc" ? "selected" : "")>Giá giảm dần</option>
+    </select>
+    <button class="btn" type="submit">Tìm kiếm</button>
+</div>}
+@if (Model.Products.Count == 0)
+{
+<div class="alert">Không tìm thấy sản phẩm phù hợp.</div> }
+            else
+            {
+<table class="data-table">
+    <thead><tr><th>ID</th><th>Tên</th><th>Danh mục</th><th>Giá</th><th>Số lượng</th></tr></thead>
+    <tbody>
+        @foreach (var p in Model.Products)
+        {
+<tr><td>@p.ProductID</td><td>@p.ProductName</td><td>@p.Category</td><td>@p.Price.ToString("N0")</td><td>@p.Quantity</td></tr>}
+    </tbody>
+</table>}

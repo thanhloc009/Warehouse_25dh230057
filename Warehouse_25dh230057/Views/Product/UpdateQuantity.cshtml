@@ -1,0 +1,29 @@
+﻿@model Warehouse_25dh230057.Models.UpdateQuantityViewModel
+@{ ViewBag.Title = "Kiểm kê sản phẩm";
+                Layout = "~/Views/Shared/_LayoutWare.cshtml"; }
+<h2>Cập nhật số lượng theo kiểm kê</h2>
+
+@if (Model.ProductID == 0)
+{@* Bước 1: chưa có id -> chọn sản phẩm (gửi GET kèm id) *@ using (Html.BeginForm("UpdateQuantity", "Product", FormMethod.Get))
+                {
+<div class="form-card">
+    <label>Chọn sản phẩm cần kiểm kê</label>
+    @Html.DropDownList("id", (SelectList)ViewBag.Products, "-- Chọn sản phẩm --", new { required = "required" })
+    <button class="btn" type="submit">Tiếp tục</button>
+</div> }
+            }
+            else
+            { @* Bước 2: nhập số lượng thực tế *@ using (Html.BeginForm("UpdateQuantity", "Product", FormMethod.Post))
+                            {
+            @Html.AntiForgeryToken()
+                                @Html.HiddenFor(m => m.ProductID)
+                                                    <div class="form-card">
+                                                        <p><b>Mã sản phẩm:</b> @Model.ProductID</p>
+                                                        <p><b>Tên sản phẩm:</b> @Model.ProductName</p>
+                                                        <p><b>Số lượng đang lưu:</b> @Model.OldQuantity</p>
+                                                        <label>Số lượng thực tế</label>
+                                                        @Html.TextBoxFor(m => m.ActualQuantity, new { type = "number", min = "0", step = "1", required = "required" })
+                                                        @Html.ValidationMessageFor(m => m.ActualQuantity, "", new { @class = "field-error" })
+                                                        <button class="btn" type="submit">Cập nhật kiểm kê</button>
+                                                    </div>}
+                                                                }

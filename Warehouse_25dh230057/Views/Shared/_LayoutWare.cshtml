@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - Warehouse Management</title>
+    <link href="@Url.Content("~/Content/sitewarehouse.css")" rel="stylesheet" />
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">WAREHOUSE<span>25DH230057</span></div>
+        <div class="student">Họ tên: HoangDuyThanhLoc &nbsp; | &nbsp; MSSV: 25DH230057</div>
+    </header>
+
+    <div class="shell">
+        <aside class="sidebar">
+            <div class="menu-title">QUẢN LÝ KHO</div>
+            <a href="@Url.Action("Index", "Products")">Danh sách sản phẩm</a>
+            <a href="@Url.Action("Search", "Product")">Tra cứu hàng hóa</a>
+            <a href="@Url.Action("UpdateQuantity", "Product")">Kiểm kê một sản phẩm</a>
+            <a href="@Url.Action("UpdateTwoQuantities", "Product")">Kiểm kê hai sản phẩm</a>
+            <a href="@Url.Action("Create", "Products")">Thêm sản phẩm</a>
+            <a href="@Url.Action("Statistics", "Product")">Thống kê kho</a>
+        </aside>
+
+        <main class="main-content">
+            @if (TempData["Message"] != null)
+            {
+<div class="alert success">@TempData["Message"]</div>            }
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="footer">
+        Ngày tháng năm sinh: 31/12/2007
+    </footer>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

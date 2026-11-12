@@ -1,0 +1,11 @@
+﻿@model Warehouse_25dh230057.Models.InventoryStatisticsViewModel
+@{ ViewBag.Title = "Thống kê kho";
+    Layout = "~/Views/Shared/_LayoutWare.cshtml";
+}
+<h2>Thống kê kết quả kiểm kê</h2>
+<div class="stats-grid">
+    <div class="stat-card"><span>Tổng số sản phẩm</span><strong>@Model.ProductCount</strong></div>
+    <div class="stat-card"><span>Sản phẩm hết hàng</span><strong>@Model.OutOfStockCount</strong></div>
+    <div class="stat-card"><span>Tổng giá trị tồn kho</span><strong>@Model.TotalInventoryValue.ToString("N0")</strong><small>VNĐ</small></div>
+</div>
+<p class="muted">Số liệu được truy vấn trực tiếp từ SQL Server thông qua Entity Framework mỗi lần mở trang.</p>
